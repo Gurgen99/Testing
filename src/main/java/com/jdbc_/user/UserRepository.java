@@ -36,12 +36,37 @@ public class UserRepository {
                 password = resultSet.getString("password");
                 roleId = resultSet.getString("role_id");
             }
-            return new User(id, usernameResult,
-                    password, roleId);
+            return new User(id, usernameResult, password, roleId);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return null;
+    }
+
+    public void getUsersTable() {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("Select * from users");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String id = resultSet.getString("id");
+                String username = resultSet.getString("username");
+                String password = resultSet.getString("password");
+                String roleId = resultSet.getString("role_id");
+                PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT roleName from role where id=?");
+                preparedStatement1.setString(1, roleId);
+                ResultSet resultSet1 = preparedStatement1.executeQuery();
+                String roleName = null;
+                while (resultSet1.next()) {
+                    roleName = resultSet1.getString("roleName");
+                }
+                System.out.println("id=" + id +
+                        "  username='" + username + "'  " +
+                        "password='" + password + "'  " +
+                        "roleName='" + roleName + "'  ");
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     public void update(User user) {

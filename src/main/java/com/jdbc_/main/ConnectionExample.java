@@ -6,8 +6,8 @@ public class ConnectionExample {
     public static void main(String[] args) {
         Menu menu = new Menu();
         InitDatabase.initDatabase();
+        menu.printMainMenu();
         while (true) {
-            menu.printMainMenu();
             menu.readUserOption();
         }
     }

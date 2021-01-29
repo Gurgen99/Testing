@@ -38,6 +38,20 @@ public class RoleRepository {
         return null;
     }
 
+    public void getRoleTable() {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("Select * from role");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String rolename = resultSet.getString("roleName");
+                String id = resultSet.getString("id");
+                System.out.println("id= " + id + "  roleName='" + rolename + "'");
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
     public void update(String oldRoleName, String updatedRoleName) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("update role set roleName=? where roleName=?");

@@ -24,10 +24,13 @@ public class Menu {
         System.out.println("Press ur to update role");
         System.out.println("Press gu to get user");
         System.out.println("Press gr to get role");
+        System.out.println("Press grt to get role Table");
+        System.out.println("Press gut to get users Table ");
         System.out.println("Press q to quit");
     }
 
     void readUserOption() {
+        System.out.print("\nPress command-> ");
         String input = in.next();
         executeCRUD(input);
     }
@@ -60,6 +63,12 @@ public class Menu {
                 break;
             case "gr":
                 executeGetRole();
+                break;
+            case "grt":
+                executeGetRoleTable();
+                break;
+            case "gut":
+                executeGetUsersTable();
                 break;
             case "q":
                 System.out.println("Good Bye");
@@ -110,7 +119,7 @@ public class Menu {
     }
 
     private void executeUpdateUser() {
-        System.out.println("Delete User->");
+        System.out.println("Update User->");
         System.out.print("Input username for update -> ");
         String oldUsername = in.next();
         User updatedUser = userRepository.get(oldUsername);
@@ -137,7 +146,6 @@ public class Menu {
         System.out.print("Input username for getting -> ");
         String username = in.next();
         System.out.println(userRepository.get(username).toString());
-        System.out.println();
     }
 
     private void executeGetRole() {
@@ -145,7 +153,14 @@ public class Menu {
         System.out.print("Input roleName for getting -> ");
         String roleName = in.next();
         System.out.println(roleRepository.get(roleName).toString());
-        System.out.println();
+    }
+
+    private void executeGetRoleTable() {
+        roleRepository.getRoleTable();
+    }
+
+    private void executeGetUsersTable() {
+        userRepository.getUsersTable();
     }
 
     private void executeRoleAssignment() {
