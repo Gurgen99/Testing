@@ -13,8 +13,8 @@ public class RoleAssignmentService {
     }
 
     public void assignRoleToUser(String username, String roleName) {
-        User user = userRepository.get(username);
-        Role role = roleRepository.get(roleName);
+        User user = userRepository.getByUsername(username);
+        Role role = roleRepository.getByRoleName(roleName);
         user.setRoleId(role.getId());
         userRepository.update(user);
     }

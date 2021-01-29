@@ -22,8 +22,8 @@ public class Menu {
         System.out.println("Press dr to delete role by roleName");
         System.out.println("Press uu to update user");
         System.out.println("Press ur to update role");
-        System.out.println("Press gu to get user");
-        System.out.println("Press gr to get role");
+        System.out.println("Press gu to get user by username");
+        System.out.println("Press gr to get role by roleName");
         System.out.println("Press grt to get role Table");
         System.out.println("Press gut to get users Table ");
         System.out.println("Press q to quit");
@@ -34,7 +34,6 @@ public class Menu {
         String input = in.next();
         executeCRUD(input);
     }
-
     private void executeCRUD(String input) {
         switch (input) {
             case "cu":
@@ -122,7 +121,7 @@ public class Menu {
         System.out.println("Update User->");
         System.out.print("Input username for update -> ");
         String oldUsername = in.next();
-        User updatedUser = userRepository.get(oldUsername);
+        User updatedUser = userRepository.getByUsername(oldUsername);
         System.out.print("Input NEW username for update -> ");
         String updatedUsername = in.next();
         System.out.print("Input NEW password for update -> ");
@@ -145,14 +144,14 @@ public class Menu {
         System.out.println("Get User->");
         System.out.print("Input username for getting -> ");
         String username = in.next();
-        System.out.println(userRepository.get(username).toString());
+        System.out.println(userRepository.getByUsername(username).toString());
     }
 
     private void executeGetRole() {
         System.out.println("Get Role->");
         System.out.print("Input roleName for getting -> ");
         String roleName = in.next();
-        System.out.println(roleRepository.get(roleName).toString());
+        System.out.println(roleRepository.getByRoleName(roleName).toString());
     }
 
     private void executeGetRoleTable() {

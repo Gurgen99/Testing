@@ -20,18 +20,16 @@ public class RoleRepository {
         }
     }
 
-    public Role get(String roleName) {
+    public Role getByRoleName(String roleName) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("Select * from role where roleName=?");
             preparedStatement.setString(1, roleName);
             ResultSet resultSet = preparedStatement.executeQuery();
-            String rolename = null;
-            String id = null;
             while (resultSet.next()) {
-                rolename = resultSet.getString("roleName");
-                id = resultSet.getString("id");
+                return new Role(resultSet.getString("roleName"),
+                        resultSet.getString("id"));
             }
-            return new Role(rolename, id);
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

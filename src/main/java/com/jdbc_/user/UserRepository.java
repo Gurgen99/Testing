@@ -21,22 +21,19 @@ public class UserRepository {
         }
     }
 
-    public User get(String username) {
+    public User getByUsername(String username) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("Select * from users where userName=?");
             preparedStatement.setString(1, username);
             ResultSet resultSet = preparedStatement.executeQuery();
-            String id = null;
-            String usernameResult = null;
-            String password = null;
-            String roleId = null;
             while (resultSet.next()) {
-                id = resultSet.getString("id");
-                usernameResult = resultSet.getString("username");
-                password = resultSet.getString("password");
-                roleId = resultSet.getString("role_id");
+                return new User(
+                        resultSet.getString("id"),
+                        resultSet.getString("username"),
+                        resultSet.getString("password"),
+                        resultSet.getString("role_id"));
             }
-            return new User(id, usernameResult, password, roleId);
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
